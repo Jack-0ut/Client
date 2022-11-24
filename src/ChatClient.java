@@ -1,5 +1,12 @@
-public class Main {
+
+public class ChatClient {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        ConnectInputMessage connectWithServer = new ConnectInputMessage();
+        Thread connectInputMessageThread = new Thread(connectWithServer);
+        connectInputMessageThread.start();
+
+        ReceiveMessageFromServer receiveMessage = new ReceiveMessageFromServer(connectWithServer.getInputStreamServer());
+        Thread receiveMessageThread = new Thread(receiveMessage);
+        receiveMessageThread.start();
     }
 }
